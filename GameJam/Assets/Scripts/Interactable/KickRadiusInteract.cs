@@ -122,12 +122,12 @@ public class KickRadiusInteract : InteractableBase
         IKickable _kickable = _other.GetComponent<IKickable>();
         if(_kickable == null) return;
 
-        kickableList.Remove(_kickable);
         foreach (IKickable _ikickable in kickableList)
         {
             OnKickEnd.Invoke(this, EventArgs.Empty);
             _ikickable.ExitRadius();
         }
+        kickableList.Remove(_kickable);
 
         if (kickableList.Count == 0)
         {
