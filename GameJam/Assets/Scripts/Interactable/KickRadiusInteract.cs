@@ -3,13 +3,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 
 public class KickRadiusInteract : InteractableBase
 {
     public event EventHandler OnKickStart;
     public event EventHandler OnKickEnd;
 
-
+    public MMFeedbacks kickFeedback;
     public event EventHandler<OnKickArrowDirectionEventArgs> OnKickArrowDirection;
     public class OnKickArrowDirectionEventArgs : EventArgs
     {
@@ -95,6 +96,7 @@ public class KickRadiusInteract : InteractableBase
             foreach(IKickable _kickable in kickableList)
             {
                 _kickable.AddForce(kickDirection * kickVelocity);
+                kickFeedback.PlayFeedbacks();
             }
 
             OnKickEnd?.Invoke(this, EventArgs.Empty);   // // 取消顯示範圍

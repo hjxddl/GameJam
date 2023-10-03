@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coll: {fileID: 7707131359412134939}
   icon: {fileID: 0}
+  kickFeedback: {fileID: 0}
   kickVelocity: 10
   drag: 20
   holdTimeScale: 0.5
