@@ -21,6 +21,8 @@ public class InputManager : MonoBehaviour
 
     private bool isKickKey;
     private bool isKickKeyDown;
+    private bool isPauseKey;
+    private bool isPauseKeyDown;
 
     private Coroutine holdTimeCoroutine;
     
@@ -35,9 +37,12 @@ public class InputManager : MonoBehaviour
 
         playerInput = new PlayerInput();    
         playerInput.Player.Enable();
+        playerInput.UI.Enable();
+        playerInput.Pause.Disable();
 
         playerInput.Player.Kick.performed +=  Kick_started;
         playerInput.Player.Kick.canceled += Kick_canceled;
+        playerInput.Player.Pause.performed += Pause_started;
     }
     private void OnDestroy() 
     {
@@ -69,6 +74,12 @@ public class InputManager : MonoBehaviour
     {
         isKickKey = false;
         isKickKeyDown = false;
+    }
+
+    private void Pause_started(InputAction.CallbackContext context)
+    {
+        isPauseKey = true;
+        isPauseKeyDown = true;
     }
 
     private IEnumerator Coroutine_KickHold()
@@ -112,5 +123,26 @@ public class InputManager : MonoBehaviour
     public bool IsKickKey()
     {
         return isKickKey;
+    }
+    
+    public bool IsPauseKey()
+    {
+        return isPauseKey; 
+    }
+    public bool IsPauseKeyDown() {
+        return isPauseKeyDown;
+    }
+    public void SwitchCurrentActionMap(string A)
+    {
+        if (A == "Pause")
+        {
+            playerInput.Player.Disable();
+            playerInput.Pause.Enable();
+        }
+        else
+        {
+            playerInput.Player.Enable();
+            playerInput.Pause.Disable();
+        }
     }
 }
