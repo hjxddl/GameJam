@@ -71,7 +71,7 @@ public class KickRadiusInteract : InteractableBase
                 kickDirection = kickDirectionInput;
                 kickDirection.Normalize();
             }
-            Debug.Log(kickDirection);
+            // Debug.Log(kickDirection);
 
             // 瞄準箭頭角度
             float _angle = Vector2.SignedAngle(Vector2.right, kickDirection);
